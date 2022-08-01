@@ -7,10 +7,10 @@ public class PlatformSpawner : MonoBehaviour
     [SerializeField] GameObject platformPrefab;
     [SerializeField] int poolSize = 50;
 
-    Vector3 forwardSide;
-    Vector3 rightSide;
+    Vector3 _forwardSide;
+    Vector3 _rightSide;
     Vector3 _lastCoordinate;
-    List<GameObject> pool = new List<GameObject>();
+    List<GameObject> _pool = new List<GameObject>();
 
     [SerializeField] bool isAlive = true;
 
@@ -21,8 +21,8 @@ public class PlatformSpawner : MonoBehaviour
         Instance = this;
         GeneratePool();
         _lastCoordinate = new Vector3(6.5f, 0, 3.5f); // First Cube Position
-        rightSide = new Vector3(0, 0, 3); // 3x3 square
-        forwardSide = new Vector3(3, 0, 0);
+        _rightSide = new Vector3(0, 0, 3); // 3x3 square
+        _forwardSide = new Vector3(3, 0, 0);
 
     }
 
@@ -37,7 +37,7 @@ public class PlatformSpawner : MonoBehaviour
         {
             GameObject prefabInPool = Instantiate(platformPrefab, transform.position, Quaternion.identity);
             prefabInPool.SetActive(false);
-            pool.Add(prefabInPool);
+            _pool.Add(prefabInPool);
         }
     }
 
@@ -47,11 +47,11 @@ public class PlatformSpawner : MonoBehaviour
 
         if(randomPos == 0)
         {
-            foreach(var prefab in pool)
+            foreach(var prefab in _pool)
             {
                 if (!prefab.activeInHierarchy)
                 {
-                    _lastCoordinate += rightSide;
+                    _lastCoordinate += _rightSide;
                     prefab.transform.position = Vector3.zero;
                     prefab.transform.position += _lastCoordinate;
                     prefab.SetActive(true);
@@ -62,11 +62,11 @@ public class PlatformSpawner : MonoBehaviour
         }
         else
         {
-            foreach (var prefab in pool)
+            foreach (var prefab in _pool)
             {
                 if (!prefab.activeInHierarchy)
                 {
-                    _lastCoordinate += forwardSide;
+                    _lastCoordinate += _forwardSide;
                     prefab.transform.position = Vector3.zero;
                     prefab.transform.position += _lastCoordinate;
                     prefab.SetActive(true);

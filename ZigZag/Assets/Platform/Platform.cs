@@ -5,8 +5,8 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
-    MeshRenderer meshRenderer;
-    int index;
+    MeshRenderer _meshRenderer;
+    int _index;
     float _lerpTime = 0.5f;
     float _changer;
 
@@ -14,7 +14,7 @@ public class Platform : MonoBehaviour
 
     private void Awake()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
+        _meshRenderer = GetComponent<MeshRenderer>();
 
     }
 
@@ -29,17 +29,17 @@ public class Platform : MonoBehaviour
 
     private void Update()
     {
-        meshRenderer.material.color = Color.Lerp(meshRenderer.material.color, colorList[index], _lerpTime * Time.deltaTime);
+        _meshRenderer.material.color = Color.Lerp(_meshRenderer.material.color, colorList[_index], _lerpTime * Time.deltaTime);
         _changer = Mathf.Lerp(_changer, 1f, _lerpTime * Time.deltaTime);
 
         if(_changer > 0.9f)
         {
             _changer = 0;
-            index++;
+            _index++;
 
-            if(index >= colorList.Length)
+            if(_index >= colorList.Length)
             {
-                index = 0;
+                _index = 0;
             }
         }
     }

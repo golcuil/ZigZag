@@ -9,11 +9,11 @@ public class UIHandler : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     int _score = 0;
 
-    int index;
+    int _index;
     float _lerpTime = 0.5f;
     float _changer;
 
-    Color[] colorList = new Color[] { Color.red, Color.magenta, Color.blue, Color.yellow };
+    Color[] _colorList = new Color[] { Color.red, Color.magenta, Color.blue, Color.yellow };
 
     public static UIHandler Instance;
 
@@ -36,17 +36,17 @@ public class UIHandler : MonoBehaviour
 
     private void Update()
     {
-        scoreText.color = Color.Lerp(scoreText.color, colorList[index], _lerpTime * Time.deltaTime);
+        scoreText.color = Color.Lerp(scoreText.color, _colorList[_index], _lerpTime * Time.deltaTime);
         _changer = Mathf.Lerp(_changer, 1f, _lerpTime * Time.deltaTime);
 
         if (_changer > 0.9f)
         {
             _changer = 0;
-            index++;
+            _index++;
 
-            if (index >= colorList.Length)
+            if (_index >= _colorList.Length)
             {
-                index = 0;
+                _index = 0;
             }
         }
     }
