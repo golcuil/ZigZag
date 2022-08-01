@@ -9,6 +9,8 @@ public class UIHandler : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     int _score = 0;
 
+    public int Score { get => _score; set => _score = value; }
+
     int _index;
     float _lerpTime = 0.5f;
     float _changer;
